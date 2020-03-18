@@ -1,0 +1,1 @@
+## Docker image for php 7.4 and mongodb extension
