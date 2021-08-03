@@ -1,4 +1,4 @@
-FROM php:7.4-buster
+FROM php:8.0-fpm
 
 # Start Composer installation
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -18,8 +18,8 @@ RUN apt-get update -qq \
 
 # Start mongodb installation
 RUN pecl install mongodb
-RUN echo "extension=/usr/local/lib/php/extensions/no-debug-non-zts-20190902/mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
-
+# RUN echo "extension=/usr/local/lib/php/extensions/no-debug-non-zts-20190902/mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
+RUN docker-php-ext-enable mongodb
 # Start creation of non-root user
 ARG UID=1000
 ARG GID=1000

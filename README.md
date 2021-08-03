@@ -1,1 +1,1 @@
-## Docker image for php 7.4 and mongodb extension
+## Docker image for php 8.0 and mongodb extension enabled
