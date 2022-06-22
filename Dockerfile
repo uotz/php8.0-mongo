@@ -1,4 +1,4 @@
-FROM php:8.0-fpm
+FROM php:8.1-fpm
 
 # Start Composer installation
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -16,10 +16,15 @@ RUN apt-get update -qq \
   && apt-get clean
 # End Project dependencies installation
 
+RUN apt-get install -y openssl libssl-dev libcurl4-openssl-dev
+
 # Start mongodb installation
 RUN pecl install mongodb
-# RUN echo "extension=/usr/local/lib/php/extensions/no-debug-non-zts-20190902/mongodb.so" > /usr/local/etc/php/conf.d/mongo.ini
+
 RUN docker-php-ext-enable mongodb
+
+RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
+
 # Start creation of non-root user
 ARG UID=1000
 ARG GID=1000

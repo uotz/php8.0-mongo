@@ -1,1 +1,1 @@
-## Docker image for php 8.0 and mongodb extension enabled
+## Docker image for php 8.1, mongodb extension enabled, pre installed composer and non-root user
